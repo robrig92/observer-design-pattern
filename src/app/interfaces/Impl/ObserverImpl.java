@@ -11,8 +11,10 @@ public class ObserverImpl implements IObserver {
     private String name;
     private ISubject subject;
 
-    public ObserverImpl(String name) {
+    public ObserverImpl(String name, ISubject subject) {
         this.name = name;
+        this.subject = subject;
+        subject.addObserver(this);
     }
 
     @Override
