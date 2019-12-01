@@ -30,4 +30,8 @@ public class ObserverImpl implements IObserver {
     public void getValue() {
         System.out.println(this.name +  ": " + "Valor actual " + this.subject.getValue());
     }
+
+    public String getName() {
+        return this.name;
+    }
 }

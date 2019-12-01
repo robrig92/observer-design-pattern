@@ -5,27 +5,37 @@ import app.interfaces.Impl.SubjectImpl;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        ObserverImpl observerA;
+        ObserverImpl observerB;
+        SubjectImpl subject;
         System.out.println("Observer pattern");
 
-        System.out.println("Subject created");
-        SubjectImpl subject = new SubjectImpl();
-
-        System.out.println("Observer A subscribed");
-        ObserverImpl observerA = new ObserverImpl("Observer A", subject);
+        subject = createSubject();
+        observerA = createObserver("Observer A", subject);
         subject.setValue(1);
         subject.setValue(2);
-        
-        System.out.println("Observer B subscribed");
-        ObserverImpl observerB = new ObserverImpl("Observer B", subject);
-        subject.addObserver(observerB);
-        observerB.setSubject(subject);
 
+        observerB = createObserver("Observer B", subject);
         subject.setValue(19);
         subject.setValue(10);
 
-        System.out.println("Removed Observer A");
-        subject.removeObserver(observerA);
-
+        subject = removeObserver(subject, observerA);
         subject.setValue(100);
+    }
+
+    public static ObserverImpl createObserver(String name, SubjectImpl subject) {
+        System.out.println(name + " subscribed");
+        return new ObserverImpl(name, subject);
+    }
+
+    public static SubjectImpl createSubject() {
+        System.out.println("Subject created");
+        return new SubjectImpl();
+    }
+
+    public static SubjectImpl removeObserver(SubjectImpl subject, ObserverImpl observer) {
+        System.out.println(observer.getName() + " unsuscribed");
+        subject.removeObserver(observer);
+        return subject;
     }
 }
