@@ -8,6 +8,7 @@ import app.interfaces.ISubject;
  */
 public class ObserverImpl implements IObserver {
 
+    private int value;
     private String name;
     private ISubject subject;
 
@@ -19,7 +20,8 @@ public class ObserverImpl implements IObserver {
 
     @Override
     public void update(int value) {
-        System.out.println(this.name + " reports: Updated value " + value);
+        this.value = value;
+        System.out.println(this.name + " reports: Updated value " + this.value);
     }
 
     @Override
@@ -28,7 +30,8 @@ public class ObserverImpl implements IObserver {
     }
 
     public void getValue() {
-        System.out.println(this.name +  ": " + "Valor actual " + this.subject.getValue());
+        this.value = this.subject.getValue();
+        System.out.println(this.name +  ": " + "Valor actual " + this.value);
     }
 
     public String getName() {
